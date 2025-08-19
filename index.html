@@ -4,8 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Scrabble vs. Bot – Duden</title>
+
+  <!-- vermeidet 404 auf favicon -->
+  <link rel="icon" href="data:," />
+
+  <!-- (optional) Preload – kann bleiben oder entfernt werden -->
   <link rel="preload" href="duden.txt" as="fetch" crossorigin="anonymous" />
   <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#0f1220" />
 </head>
 <body>
   <header>
@@ -76,7 +82,7 @@
   </main>
 
   <!-- Startbildschirm -->
-  <div id="startScreen" class="overlay">
+  <div id="startScreen" class="overlay" role="dialog" aria-modal="true">
     <div class="sheet">
       <h2>Scrabble vs. Bot</h2>
       <p class="status">Das Spiel lädt automatisch <strong>duden.txt</strong>. Wähle eine Botstärke und starte.</p>
@@ -91,6 +97,9 @@
       <p id="lexHint" class="status" style="margin-top:8px">Lexikon: lädt…</p>
     </div>
   </div>
+
+  <!-- Touch-Drag-Ghost: wird per JS angezeigt und bewegt -->
+  <div id="dragGhost" aria-hidden="true"></div>
 
   <script src="script.js" defer></script>
 </body>
