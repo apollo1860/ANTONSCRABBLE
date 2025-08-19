@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scrabble vs. Bot – Duden</title>
+  <link rel="preload" href="duden.txt" as="fetch" crossorigin="anonymous" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Scrabble vs. Bot</h1>
+    <div class="spacer"></div>
+    <div class="toolbar">
+      <label>Schwierigkeit:
+        <select id="difficulty">
+          <option value="amateur">Amateur (~10)</option>
+          <option value="normal" selected>Normal (~15)</option>
+          <option value="profi">Profi (~20)</option>
+        </select>
+      </label>
+      <label>Kategorie-Bonus:
+        <select id="category">
+          <option value="none" selected>Keine</option>
+          <option value="stadt">Stadt</option>
+          <option value="tier">Tier</option>
+          <option value="sport">Sport</option>
+          <option value="technik">Technik</option>
+        </select>
+      </label>
+      <span id="lexInfo" class="tag">Lexikon: lädt…</span>
+      <button class="primary" id="newGameBtn">Neues Spiel</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="board">
+      <div id="grid" class="grid"></div>
+    </section>
+
+    <aside class="side">
+      <div class="box">
+        <strong>Spieler-Steine</strong>
+        <div id="playerRack" class="row"></div>
+      </div>
+      <div class="box">
+        <strong>Bot-Steine</strong>
+        <div id="botRack" class="row"></div>
+      </div>
+      <div class="box">
+        <strong>Punkte</strong>
+        <div class="row spread">
+          <div>Spieler: <span id="pScore">0</span></div>
+          <div>Bot: <span id="bScore">0</span></div>
+        </div>
+        <div class="status" id="status">Bereit.</div>
+      </div>
+      <div class="box">
+        <strong>Zug</strong>
+        <div class="row wrap">
+          <button id="confirmMove">Zug auswerten</button>
+          <button id="shuffleRack" class="ghost">Rack mischen</button>
+          <button id="swapTiles" class="ghost">Steine tauschen</button>
+        </div>
+      </div>
+      <div class="box">
+        <strong>Protokoll</strong>
+        <div id="log" class="log"></div>
+        <div id="challengeBar" class="challenge" style="display:none">
+          <span>Bot-Zug prüfen:</span>
+          <button id="acceptBot" class="ghost">Akzeptieren</button>
+          <button id="rejectBot" class="danger">Wort ablehnen</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Startbildschirm -->
+  <div id="startScreen" class="overlay">
+    <div class="sheet">
+      <h2>Scrabble vs. Bot</h2>
+      <p class="status">Das Spiel lädt automatisch <strong>duden.txt</strong>. Wähle eine Botstärke und starte.</p>
+      <div class="row gap">
+        <button class="strength" data-diff="amateur">Amateur (~10)</button>
+        <button class="strength active" data-diff="normal">Normal (~15)</button>
+        <button class="strength" data-diff="profi">Profi (~20)</button>
+      </div>
+      <div class="row end">
+        <button id="startBtn" class="primary" disabled>Spiel beginnen</button>
+      </div>
+      <p id="lexHint" class="status" style="margin-top:8px">Lexikon: lädt…</p>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
