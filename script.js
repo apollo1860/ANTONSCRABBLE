@@ -1,3 +1,29 @@
+async function loadLexicon() {
+  const info = document.getElementById('lexInfo');
+  const hint = document.getElementById('lexHint');
+  const startBtn = document.getElementById('startBtn');
+  const LEX_URL = new URL('duden.txt', document.baseURI).toString(); // robust relativ zur Seite
+
+  function show(msg){ if(info) info.textContent = msg; if(hint) hint.textContent = msg; }
+
+  try {
+    show('Lexikon: lädt…');
+    const res = await fetch(LEX_URL + '?ts=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status + ' beim Laden von ' + LEX_URL);
+    const txt = await res.text();
+    const words = txt.split(/\r?\n/).map(w => w.toUpperCase().replace(/[^A-ZÄÖÜẞ]/g,'')).filter(Boolean);
+    const count = words.length;
+    window.state.lex = new Set(words);
+    show(`Lexikon: ${count.toLocaleString('de-DE')} Wörter`);
+    if (startBtn) startBtn.disabled = count === 0;
+    console.log('Lexikon geladen:', { url: LEX_URL, count });
+  } catch (err) {
+    console.error('Lexikon-Fehler:', err);
+    show('Lexikon konnte nicht geladen werden (duden.txt). Siehe Konsole.');
+    if (startBtn) startBtn.disabled = true;
+  }
+}
+
 'use strict';
 
 // --- Constants
