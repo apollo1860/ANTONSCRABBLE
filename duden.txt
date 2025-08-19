@@ -1134,6 +1134,8 @@ delikat
 demagogisch
 demanten
 dement
+demente
+dementer
 dementsprechend
 demgemäß
 demilitarisiert
@@ -26286,3 +26288,4 @@ zytotrop
 überspannt
 überwältigend
 überzeugend
+
